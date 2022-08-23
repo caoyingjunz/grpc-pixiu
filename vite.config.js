@@ -8,6 +8,12 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  envDir: "./config",
+  server: {
+    port: 5000,
+    strictPort: true,
+    open: true,
+  },
   plugins: [
     vue(),
     AutoImport({
