@@ -1,14 +1,21 @@
 <template>
   <div class="header-container">
     <!-- <div>logo</div> -->
-    <el-icon :size="20"><Fold /></el-icon>
+    <div @click="menu.changeCollapse" v-if="!menu.isCollapsed">
+      <el-icon :size="20"><Fold /></el-icon>
+    </div>
+    <div @click="menu.changeCollapse" v-else>
+      <el-icon :size="20"><Expand /></el-icon>
+    </div>
     <div>abc</div>
     <div>头像</div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { Fold, Expand } from "@element-plus/icons-vue";
+import { useMenuStore } from "@/store";
+const menu = useMenuStore();
 </script>
 
 <style scoped>

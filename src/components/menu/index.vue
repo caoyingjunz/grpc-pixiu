@@ -5,8 +5,8 @@
   </el-radio-group> -->
   <el-menu
     default-active="2"
-    class="el-menu-vertical-demo"
-    :collapse="isCollapse"
+    class="el-menu-vertical-demo el-menu-vertical"
+    :collapse="menu.isCollapsed"
     @open="handleOpen"
     @close="handleClose"
   >
@@ -44,15 +44,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import {
   Document,
   Menu as IconMenu,
   Location,
   Setting,
 } from "@element-plus/icons-vue";
+import { useMenuStore } from "@/store";
 
-const isCollapse = ref(false);
+const menu = useMenuStore();
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath);
 };
@@ -64,6 +64,8 @@ const handleClose = (key, keyPath) => {
 <style>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
+}
+.el-menu-vertical {
   height: 100%;
 }
 </style>
