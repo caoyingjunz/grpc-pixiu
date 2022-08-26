@@ -1,2 +1,3 @@
 import useCounterStore from "./counter";
-export { useCounterStore };
+import useMenuStore from "./menu";
+export { useCounterStore, useMenuStore };
