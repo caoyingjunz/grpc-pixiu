@@ -1,0 +1,197 @@
+#backont {
+    background-image: url(../static/beijing.jpeg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-backgroud-size: cover;
+    -moz-text-size-adjust: cover;
+    min-height: 100vh;
+}
+
+#app {
+    height: 100vh;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.meituan-content {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-120%, -50%);
+    /* transform: translate(-50%, -50%); */
+}
+
+.login-cont {
+    width: 500px;
+    height: 300px;
+    background: #f9de80;
+    border-radius: 5px;
+}
+
+.meituan-titile {
+    text-align: center;
+    color:#000000;
+    font-size: 30px;
+    padding-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.meituan-user {
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 30px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.meituan-user p {
+    width: 50px;
+    color:#000000;
+    font-size: 16px;
+}
+
+.inputflex {
+    flex: 1;
+}
+
+.reg-view {
+    width: 400px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.reg-view p {
+    cursor: pointer;
+    display: contents;
+}
+
+.meituan-btn {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:  10px auto 0 auto;
+    font-size:  16px;
+}
+
+.sidebar-top {
+    width: 100%;
+    background: #FFFFFF;
+    height: 50px;
+    color: #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+}
+
+.sidebar-cont {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 50px;
+    background: #FFFFFF;
+    width: 200px;
+    height: 100vh;
+    color: #000000 !important;
+    font-size: 16px;
+    overflow-y: auto;
+}
+
+.sidebar-top div:nth-child(1) {
+    padding-left: 22px;
+    font-size: 18px;
+}
+
+.sidebar-top div:nth-child(2) {
+    padding-right: 22px;
+    cursor: pointer;
+}
+
+/* 主页定位 */
+.ordering {
+    position: absolute;
+    top: 50px;
+    left: 200px;
+    right: 0;
+    padding: 10px 0;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+/* 标题 */
+.heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.el-steps{
+    margin: 20px 0;
+}
+
+.el-step__title{
+    font-size: 13px;
+}
+
+/* 全局响应式 */
+/* 大于 1700 */
+@media screen and (min-width: 1700px) {
+    .ordering {
+        max-width: 1400px;
+    }
+}
+
+/* 小于 1700 */
+@media screen and (max-width: 1700px) {
+    .ordering {
+        max-width: 1300px;
+    }
+}
+
+@media screen and (max-width: 1650px) {
+    .ordering {
+        max-width: 1100px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .ordering {
+        max-width: 1100px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .ordering {
+        max-width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .ordering {
+        max-width: 900px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .ordering {
+        max-width: 850px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .ordering {
+        max-width: 800px;
+    }
+}
