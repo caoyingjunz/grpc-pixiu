@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "../service";
+
+package service;
+
+message Cluster{
+
+}
+
+message ClusterInfo {
+  string ClusterName = 1;
+  float KubernetesEdi = 2;
+  string Region = 3;
+  string ContaionsRunTime = 4;
+  string ContaionsNetworkPlugins = 5;
+  string ContaionsNetwork = 6;
+  string ServiceCidr = 7;
+  string Clusterdescribe = 8;
+}
+
+message AddNode {
+  string ClusterType = 1;
+  string VipKubernetes =2;
+  string DeplayMaster = 3;
+  string DeplayNode = 4;
+  string NodeLogin = 5;
+}
+
+message ClusterDeploy {
+  string ApiServerAdress = 1;
+  string KubeProxy =2;
+
+
+}
+
+message Module {
+
+}
