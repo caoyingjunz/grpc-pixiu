@@ -15,12 +15,21 @@ message ProductRequest {
   string ContaionsNetwork = 6;
   string ServiceCidr = 7;
   string Clusterdescribe = 8;
-
+  string ClusterType = 9;
+  string VipKubernetes = 10;
+  repeated string DeplayMaster = 11;
+  repeated string DeplayNode = 12;
+  string NodeLogin = 13;
+  string UserName = 14;
+  string Password = 15;
+  string Ip = 16;
 }
 
 // 定义response model 返回
 message ProductResponse {
-  int32 prod_stock = 1; // 1代表顺序
+  string clustername = 1; // 1代表顺序
+  string username =2;
+  string password =3;
 }
 
 // 定义服务主体

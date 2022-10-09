@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"grpc-pixiu/service"
-	"log"
 )
 
 func main() {
@@ -18,12 +19,15 @@ func main() {
 
 	client := service.NewProdServiceClient(conn)
 	request := &service.ProductRequest{
-		ProdId: 123,
+		ClusterName: "huawei",
+		UserName:    "root",
+		Password:    "qq13069139214.",
+		Ip:          "81.68.210.233",
 	}
 
 	stockResponse, err := client.GetProductStock(context.Background(), request)
 	if err != nil {
 		log.Fatal("查询库存出错", err)
 	}
-	fmt.Println("查询成功", stockResponse.ProdStock)
+	fmt.Println("查询成功", stockResponse)
 }
