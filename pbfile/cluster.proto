@@ -1,14 +1,12 @@
+// 指定proto指定版本
 syntax = "proto3";
 
 option go_package = "../service";
-
+// 指定文件生出出来的package
 package service;
 
-message Cluster{
-
-}
-
-message ClusterInfo {
+// 定义request model 请求
+message ProductRequest {
   string ClusterName = 1;
   float KubernetesEdi = 2;
   string Region = 3;
@@ -17,23 +15,40 @@ message ClusterInfo {
   string ContaionsNetwork = 6;
   string ServiceCidr = 7;
   string Clusterdescribe = 8;
-}
-
-message AddNode {
-  string ClusterType = 1;
-  string VipKubernetes =2;
-  string DeplayMaster = 3;
-  string DeplayNode = 4;
-  string NodeLogin = 5;
-}
-
-message ClusterDeploy {
-  string ApiServerAdress = 1;
-  string KubeProxy =2;
-
 
 }
 
-message Module {
-
+// 定义response model 返回
+message ProductResponse {
+  int32 prod_stock = 1; // 1代表顺序
 }
+
+// 定义服务主体
+service ProdService {
+  // 定义方法
+  rpc GetProductStock(ProductRequest) returns(ProductResponse);
+}
+
+
+
+//message ClusterRequest{
+//
+//  message ClusterInfo {
+//
+//
+//  message AddNode {
+//    string ClusterType = 1;
+//    string VipKubernetes =2;
+//    string DeplayMaster = 3;
+//    string DeplayNode = 4;
+//    string NodeLogin = 5;
+//  }
+//
+//  message ClusterDeploy {
+//    string ApiServerAdress = 1;
+//    string KubeProxy =2;
+//  }
+//
+//  message Module {
+//  }
+//}
