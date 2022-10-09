@@ -30,11 +30,16 @@ func (p *productService) GetProductStock(context context.Context, request *Produ
 	}
 	// 建立新会话
 	session, err := client.NewSession()
-	defer session.Close()
 	if err != nil {
 		log.Fatal("建立 session 错误", err)
 	}
-	result, err := session.Output("curl https://raw.githubusercontent.com/caoyingjunz/kubez-ansible/master/tools/setup_env.sh")
+	result, err := session.Output("curl -# -O https://raw.githubusercontent.com/caoyingjunz/kubez-ansible/master/tools/setup_env.sh " +
+		"&& date " +
+		"&& bash ~/setup_env.sh " +
+		"&& kubez-ansible bootstrap-servers " +
+		"&& kubez-ansible deploy " +
+		"&& kubez-ansible post-deploy " +
+		"&& kubectl get node")
 
 	if err != nil {
 		fmt.Fprintf(os.Stdout, "Failed to run command, Err:%s", err.Error())
