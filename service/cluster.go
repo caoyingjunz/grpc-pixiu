@@ -41,13 +41,13 @@ func (p *productService) GetProductStock(context context.Context, request *Produ
 	//	"&& kubez-ansible deploy " +
 	//	"&& kubez-ansible post-deploy " +
 	//	"&& kubectl get node")
-	_, err = session.Output("ls -al && date")
+	result, err := session.Output("cat /tmp/kubez-ansible/etc/kubez/globals.yml")
 
 	if err != nil {
 		fmt.Fprintf(os.Stdout, "Failed to run command, Err:%s", err.Error())
 		os.Exit(0)
 	}
-
+	fmt.Println(string(result))
 	return &ProductResponse{Clustername: stock}, nil
 }
 
