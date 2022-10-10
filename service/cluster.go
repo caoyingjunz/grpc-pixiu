@@ -28,6 +28,7 @@ func CheckKubez() {
 			fmt.Println("Multinode 配置出错", err)
 		}
 		// TODO 渲染xml文件
+		// TODO 处理XML文件
 		deploy := exec.Command("kubez-ansible -i multinode deploy")
 		err = deploy.Run()
 		if err != nil {
