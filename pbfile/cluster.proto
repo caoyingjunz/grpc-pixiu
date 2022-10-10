@@ -8,28 +8,25 @@ package service;
 // 定义request model 请求
 message ProductRequest {
   string ClusterName = 1;
-  float KubernetesEdi = 2;
+  float KubeRelease = 2;
   string Region = 3;
-  string ContaionsRunTime = 4;
-  string ContaionsNetworkPlugins = 5;
-  string ContaionsNetwork = 6;
+  string ContainerRunTime = 4;
+  string ContainerNetworkPlugins = 5;
+  string ClusterCidr = 6;
   string ServiceCidr = 7;
-  string Clusterdescribe = 8;
+  string ClusterDescribe = 8;
   string ClusterType = 9;
   string VipKubernetes = 10;
-  repeated string DeplayMaster = 11;
-  repeated string DeplayNode = 12;
+  map<string,string> MasterInfo = 11;
+  map<string,string> NodeInfo = 12;
   string NodeLogin = 13;
-  string UserName = 14;
-  string Password = 15;
-  string Ip = 16;
 }
 
 // 定义response model 返回
 message ProductResponse {
   string clustername = 1; // 1代表顺序
-  string username =2;
-  string password =3;
+  string username = 2;
+  string password = 3;
 }
 
 // 定义服务主体

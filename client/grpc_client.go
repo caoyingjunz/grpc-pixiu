@@ -20,9 +20,12 @@ func main() {
 	client := service.NewProdServiceClient(conn)
 	request := &service.ProductRequest{
 		ClusterName: "huawei",
-		UserName:    "root",
-		Password:    "qq13069139214.",
-		Ip:          "81.68.210.233",
+		MasterInfo: map[string]string{
+			"HostName": "81.68.210.233",
+			"Adress":   "81.68.210.233",
+			"Username": "root",
+			"Password": "qq13069139214.",
+		},
 	}
 
 	stockResponse, err := client.GetProductStock(context.Background(), request)
