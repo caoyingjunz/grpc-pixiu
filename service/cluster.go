@@ -22,7 +22,23 @@ func CheckKubez() {
 		if err != nil {
 			fmt.Println("安装kubez出现问题", err)
 		}
-		fmt.Println("继续安装")
+		testMultinode := exec.Command("ansible -i multinode all -m ping")
+		err = testMultinode.Run()
+		if err != nil {
+			fmt.Println("Multinode 配置出错", err)
+		}
+		// TODO 渲染xml文件
+		deploy := exec.Command("kubez-ansible -i multinode deploy")
+		err = deploy.Run()
+		if err != nil {
+			fmt.Println("deploy 配置出错", err)
+		}
+		rc := exec.Command("kubez-ansible -i multinode post-deploy")
+		err = rc.Run()
+		if err != nil {
+			fmt.Println("rc 配置出错", err)
+		}
+		fmt.Println("集群安装成功")
 	}
 
 }
