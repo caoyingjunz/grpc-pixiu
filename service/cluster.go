@@ -3,10 +3,8 @@ package service
 import (
 	"context"
 	"fmt"
-	"log"
-	"os"
-
-	"golang.org/x/crypto/ssh"
+	"grpc-pixiu/types"
+	"os/exec"
 )
 
 var ProductService = &productService{}
@@ -14,40 +12,29 @@ var ProductService = &productService{}
 type productService struct {
 }
 
+func CheckKubez() {
+	checkKUbezcommand := exec.Command(types.CheckKubezCommand)
+	err := checkKUbezcommand.Run()
+	if err != nil {
+		installKubezCommand := exec.Command("/bin/bash", "-c", types.InstallKubezCommand)
+		fmt.Println("11111111")
+		err := installKubezCommand.Run()
+		if err != nil {
+			fmt.Println("安装kubez出现问题", err)
+		}
+		fmt.Println("继续安装")
+	}
+
+}
+
 func (p *productService) GetProductStock(context context.Context, request *ProductRequest) (*ProductResponse, error) {
 	// 具体实现业务逻辑
-	stock, name := p.GetStockById(request.ClusterName, request.MasterInfo)
-	fmt.Println(stock, name, request.MasterInfo)
+
+	CheckKubez()
+	stock, _ := p.GetStockById(request.ClusterName, request.MasterInfo)
 
 	// 建立SSH客户端连接
-	client, err := ssh.Dial("tcp", request.MasterInfo["Adress"]+":22", &ssh.ClientConfig{
-		User:            request.MasterInfo["Username"],
-		Auth:            []ssh.AuthMethod{ssh.Password(request.MasterInfo["Password"])},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-	})
-	if err != nil {
-		log.Fatal("建立客户端连接错误", err)
-	}
 
-	// 建立新会话
-	session, err := client.NewSession()
-	if err != nil {
-		log.Fatal("建立 session 错误", err)
-	}
-	//result, err := session.Output("curl -# -O https://raw.githubusercontent.com/caoyingjunz/kubez-ansible/master/tools/setup_env.sh " +
-	//	"&& date " +
-	//	"&& bash ~/setup_env.sh " +
-	//	"&& kubez-ansible bootstrap-servers " +
-	//	"&& kubez-ansible deploy " +
-	//	"&& kubez-ansible post-deploy " +
-	//	"&& kubectl get node")
-	result, err := session.Output("cat /tmp/kubez-ansible/etc/kubez/globals.yml")
-
-	if err != nil {
-		fmt.Fprintf(os.Stdout, "Failed to run command, Err:%s", err.Error())
-		os.Exit(0)
-	}
-	fmt.Println(string(result))
 	return &ProductResponse{Clustername: stock}, nil
 }
 

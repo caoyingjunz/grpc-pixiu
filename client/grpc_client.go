@@ -10,8 +10,10 @@ import (
 	"grpc-pixiu/service"
 )
 
+const address = "localhost:8002"
+
 func main() {
-	conn, err := grpc.Dial(":8002", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatal("服务端出错，连接不上", err)
 	}
