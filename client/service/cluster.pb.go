@@ -29,14 +29,14 @@ const (
 )
 
 // 定义request model 请求
-type ProductRequest struct {
+type ClusterRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	ClusterName             string            `protobuf:"bytes,1,opt,name=ClusterName,proto3" json:"ClusterName,omitempty"`
 	KubeRelease             float32           `protobuf:"fixed32,2,opt,name=KubeRelease,proto3" json:"KubeRelease,omitempty"`
-	Region                  string            `protobuf:"bytes,3,opt,name=Region,proto3" json:"Region,omitempty"`
+	Region                  []string          `protobuf:"bytes,3,rep,name=Region,proto3" json:"Region,omitempty"`
 	ContainerRunTime        string            `protobuf:"bytes,4,opt,name=ContainerRunTime,proto3" json:"ContainerRunTime,omitempty"`
 	ContainerNetworkPlugins string            `protobuf:"bytes,5,opt,name=ContainerNetworkPlugins,proto3" json:"ContainerNetworkPlugins,omitempty"`
 	ClusterCidr             string            `protobuf:"bytes,6,opt,name=ClusterCidr,proto3" json:"ClusterCidr,omitempty"`
@@ -46,11 +46,11 @@ type ProductRequest struct {
 	VipKubernetes           string            `protobuf:"bytes,10,opt,name=VipKubernetes,proto3" json:"VipKubernetes,omitempty"`
 	MasterInfo              map[string]string `protobuf:"bytes,11,rep,name=MasterInfo,proto3" json:"MasterInfo,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	NodeInfo                map[string]string `protobuf:"bytes,12,rep,name=NodeInfo,proto3" json:"NodeInfo,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	NodeLogin               string            `protobuf:"bytes,13,opt,name=NodeLogin,proto3" json:"NodeLogin,omitempty"`
+	NodeLogin               []string          `protobuf:"bytes,13,rep,name=NodeLogin,proto3" json:"NodeLogin,omitempty"`
 }
 
-func (x *ProductRequest) Reset() {
-	*x = ProductRequest{}
+func (x *ClusterRequest) Reset() {
+	*x = ClusterRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_pbfile_cluster_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -58,13 +58,13 @@ func (x *ProductRequest) Reset() {
 	}
 }
 
-func (x *ProductRequest) String() string {
+func (x *ClusterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProductRequest) ProtoMessage() {}
+func (*ClusterRequest) ProtoMessage() {}
 
-func (x *ProductRequest) ProtoReflect() protoreflect.Message {
+func (x *ClusterRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_pbfile_cluster_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -76,115 +76,113 @@ func (x *ProductRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProductRequest.ProtoReflect.Descriptor instead.
-func (*ProductRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ClusterRequest.ProtoReflect.Descriptor instead.
+func (*ClusterRequest) Descriptor() ([]byte, []int) {
 	return file_pbfile_cluster_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProductRequest) GetClusterName() string {
+func (x *ClusterRequest) GetClusterName() string {
 	if x != nil {
 		return x.ClusterName
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetKubeRelease() float32 {
+func (x *ClusterRequest) GetKubeRelease() float32 {
 	if x != nil {
 		return x.KubeRelease
 	}
 	return 0
 }
 
-func (x *ProductRequest) GetRegion() string {
+func (x *ClusterRequest) GetRegion() []string {
 	if x != nil {
 		return x.Region
 	}
-	return ""
+	return nil
 }
 
-func (x *ProductRequest) GetContainerRunTime() string {
+func (x *ClusterRequest) GetContainerRunTime() string {
 	if x != nil {
 		return x.ContainerRunTime
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetContainerNetworkPlugins() string {
+func (x *ClusterRequest) GetContainerNetworkPlugins() string {
 	if x != nil {
 		return x.ContainerNetworkPlugins
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetClusterCidr() string {
+func (x *ClusterRequest) GetClusterCidr() string {
 	if x != nil {
 		return x.ClusterCidr
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetServiceCidr() string {
+func (x *ClusterRequest) GetServiceCidr() string {
 	if x != nil {
 		return x.ServiceCidr
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetClusterDescribe() string {
+func (x *ClusterRequest) GetClusterDescribe() string {
 	if x != nil {
 		return x.ClusterDescribe
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetClusterType() string {
+func (x *ClusterRequest) GetClusterType() string {
 	if x != nil {
 		return x.ClusterType
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetVipKubernetes() string {
+func (x *ClusterRequest) GetVipKubernetes() string {
 	if x != nil {
 		return x.VipKubernetes
 	}
 	return ""
 }
 
-func (x *ProductRequest) GetMasterInfo() map[string]string {
+func (x *ClusterRequest) GetMasterInfo() map[string]string {
 	if x != nil {
 		return x.MasterInfo
 	}
 	return nil
 }
 
-func (x *ProductRequest) GetNodeInfo() map[string]string {
+func (x *ClusterRequest) GetNodeInfo() map[string]string {
 	if x != nil {
 		return x.NodeInfo
 	}
 	return nil
 }
 
-func (x *ProductRequest) GetNodeLogin() string {
+func (x *ClusterRequest) GetNodeLogin() []string {
 	if x != nil {
 		return x.NodeLogin
 	}
-	return ""
+	return nil
 }
 
 // 定义response model 返回
-type ProductResponse struct {
+type ClusterResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Clustername string `protobuf:"bytes,1,opt,name=clustername,proto3" json:"clustername,omitempty"` // 1代表顺序
-	Username    string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
-	Password    string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	ClusterName string `protobuf:"bytes,1,opt,name=ClusterName,proto3" json:"ClusterName,omitempty"` // 1代表顺序
 }
 
-func (x *ProductResponse) Reset() {
-	*x = ProductResponse{}
+func (x *ClusterResponse) Reset() {
+	*x = ClusterResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_pbfile_cluster_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -192,13 +190,13 @@ func (x *ProductResponse) Reset() {
 	}
 }
 
-func (x *ProductResponse) String() string {
+func (x *ClusterResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProductResponse) ProtoMessage() {}
+func (*ClusterResponse) ProtoMessage() {}
 
-func (x *ProductResponse) ProtoReflect() protoreflect.Message {
+func (x *ClusterResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_pbfile_cluster_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -210,28 +208,14 @@ func (x *ProductResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProductResponse.ProtoReflect.Descriptor instead.
-func (*ProductResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ClusterResponse.ProtoReflect.Descriptor instead.
+func (*ClusterResponse) Descriptor() ([]byte, []int) {
 	return file_pbfile_cluster_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ProductResponse) GetClustername() string {
+func (x *ClusterResponse) GetClusterName() string {
 	if x != nil {
-		return x.Clustername
-	}
-	return ""
-}
-
-func (x *ProductResponse) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *ProductResponse) GetPassword() string {
-	if x != nil {
-		return x.Password
+		return x.ClusterName
 	}
 	return ""
 }
@@ -241,13 +225,13 @@ var File_pbfile_cluster_proto protoreflect.FileDescriptor
 var file_pbfile_cluster_proto_rawDesc = []byte{
 	0x0a, 0x14, 0x70, 0x62, 0x66, 0x69, 0x6c, 0x65, 0x2f, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x22,
-	0xae, 0x05, 0x0a, 0x0e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0xae, 0x05, 0x0a, 0x0e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d,
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
 	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x4b, 0x75, 0x62, 0x65, 0x52, 0x65, 0x6c, 0x65,
 	0x61, 0x73, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0b, 0x4b, 0x75, 0x62, 0x65, 0x52,
 	0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x12, 0x2a,
+	0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x12, 0x2a,
 	0x0a, 0x10, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x75, 0x6e, 0x54, 0x69,
 	0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69,
 	0x6e, 0x65, 0x72, 0x52, 0x75, 0x6e, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x38, 0x0a, 0x17, 0x43, 0x6f,
@@ -267,15 +251,15 @@ var file_pbfile_cluster_proto_rawDesc = []byte{
 	0x6e, 0x65, 0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x56, 0x69, 0x70,
 	0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x12, 0x47, 0x0a, 0x0a, 0x4d, 0x61,
 	0x73, 0x74, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x27,
-	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
+	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x49, 0x6e,
 	0x66, 0x6f, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0a, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x49,
 	0x6e, 0x66, 0x6f, 0x12, 0x41, 0x0a, 0x08, 0x4e, 0x6f, 0x64, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x18,
 	0x0c, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
-	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x4e,
+	0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x4e,
 	0x6f, 0x64, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x08, 0x4e, 0x6f,
 	0x64, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1c, 0x0a, 0x09, 0x4e, 0x6f, 0x64, 0x65, 0x4c, 0x6f,
-	0x67, 0x69, 0x6e, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x4e, 0x6f, 0x64, 0x65, 0x4c,
+	0x67, 0x69, 0x6e, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x4e, 0x6f, 0x64, 0x65, 0x4c,
 	0x6f, 0x67, 0x69, 0x6e, 0x1a, 0x3d, 0x0a, 0x0f, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x49, 0x6e,
 	0x66, 0x6f, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c,
@@ -284,20 +268,16 @@ var file_pbfile_cluster_proto_rawDesc = []byte{
 	0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01,
-	0x22, 0x6b, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x6e, 0x61,
-	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65,
-	0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d,
-	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x32, 0x53, 0x0a,
-	0x0b, 0x50, 0x72, 0x6f, 0x64, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x44, 0x0a, 0x0f,
-	0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x12,
-	0x17, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2e, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x33, 0x0a, 0x0f, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x72, 0x4e, 0x61, 0x6d, 0x65, 0x32, 0x53, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x42, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x17, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x18, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74,
+	0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x2e,
+	0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -314,16 +294,16 @@ func file_pbfile_cluster_proto_rawDescGZIP() []byte {
 
 var file_pbfile_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_pbfile_cluster_proto_goTypes = []interface{}{
-	(*ProductRequest)(nil),  // 0: service.ProductRequest
-	(*ProductResponse)(nil), // 1: service.ProductResponse
-	nil,                     // 2: service.ProductRequest.MasterInfoEntry
-	nil,                     // 3: service.ProductRequest.NodeInfoEntry
+	(*ClusterRequest)(nil),  // 0: service.ClusterRequest
+	(*ClusterResponse)(nil), // 1: service.ClusterResponse
+	nil,                     // 2: service.ClusterRequest.MasterInfoEntry
+	nil,                     // 3: service.ClusterRequest.NodeInfoEntry
 }
 var file_pbfile_cluster_proto_depIdxs = []int32{
-	2, // 0: service.ProductRequest.MasterInfo:type_name -> service.ProductRequest.MasterInfoEntry
-	3, // 1: service.ProductRequest.NodeInfo:type_name -> service.ProductRequest.NodeInfoEntry
-	0, // 2: service.ProdService.GetProductStock:input_type -> service.ProductRequest
-	1, // 3: service.ProdService.GetProductStock:output_type -> service.ProductResponse
+	2, // 0: service.ClusterRequest.MasterInfo:type_name -> service.ClusterRequest.MasterInfoEntry
+	3, // 1: service.ClusterRequest.NodeInfo:type_name -> service.ClusterRequest.NodeInfoEntry
+	0, // 2: service.CreateService.CreateCluster:input_type -> service.ClusterRequest
+	1, // 3: service.CreateService.CreateCluster:output_type -> service.ClusterResponse
 	3, // [3:4] is the sub-list for method output_type
 	2, // [2:3] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -338,7 +318,7 @@ func file_pbfile_cluster_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_pbfile_cluster_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductRequest); i {
+			switch v := v.(*ClusterRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -350,7 +330,7 @@ func file_pbfile_cluster_proto_init() {
 			}
 		}
 		file_pbfile_cluster_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductResponse); i {
+			switch v := v.(*ClusterResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -390,74 +370,74 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// ProdServiceClient is the client API for ProdService service.
+// CreateServiceClient is the client API for CreateService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ProdServiceClient interface {
+type CreateServiceClient interface {
 	// 定义方法
-	GetProductStock(ctx context.Context, in *ProductRequest, opts ...grpc.CallOption) (*ProductResponse, error)
+	CreateCluster(ctx context.Context, in *ClusterRequest, opts ...grpc.CallOption) (*ClusterResponse, error)
 }
 
-type prodServiceClient struct {
+type createServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewProdServiceClient(cc grpc.ClientConnInterface) ProdServiceClient {
-	return &prodServiceClient{cc}
+func NewCreateServiceClient(cc grpc.ClientConnInterface) CreateServiceClient {
+	return &createServiceClient{cc}
 }
 
-func (c *prodServiceClient) GetProductStock(ctx context.Context, in *ProductRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
-	out := new(ProductResponse)
-	err := c.cc.Invoke(ctx, "/service.ProdService/GetProductStock", in, out, opts...)
+func (c *createServiceClient) CreateCluster(ctx context.Context, in *ClusterRequest, opts ...grpc.CallOption) (*ClusterResponse, error) {
+	out := new(ClusterResponse)
+	err := c.cc.Invoke(ctx, "/service.CreateService/CreateCluster", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ProdServiceServer is the server API for ProdService service.
-type ProdServiceServer interface {
+// CreateServiceServer is the server API for CreateService service.
+type CreateServiceServer interface {
 	// 定义方法
-	GetProductStock(context.Context, *ProductRequest) (*ProductResponse, error)
+	CreateCluster(context.Context, *ClusterRequest) (*ClusterResponse, error)
 }
 
-// UnimplementedProdServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedProdServiceServer struct {
+// UnimplementedCreateServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedCreateServiceServer struct {
 }
 
-func (*UnimplementedProdServiceServer) GetProductStock(context.Context, *ProductRequest) (*ProductResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProductStock not implemented")
+func (*UnimplementedCreateServiceServer) CreateCluster(context.Context, *ClusterRequest) (*ClusterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCluster not implemented")
 }
 
-func RegisterProdServiceServer(s *grpc.Server, srv ProdServiceServer) {
-	s.RegisterService(&_ProdService_serviceDesc, srv)
+func RegisterCreateServiceServer(s *grpc.Server, srv CreateServiceServer) {
+	s.RegisterService(&_CreateService_serviceDesc, srv)
 }
 
-func _ProdService_GetProductStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductRequest)
+func _CreateService_CreateCluster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClusterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProdServiceServer).GetProductStock(ctx, in)
+		return srv.(CreateServiceServer).CreateCluster(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/service.ProdService/GetProductStock",
+		FullMethod: "/service.CreateService/CreateCluster",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProdServiceServer).GetProductStock(ctx, req.(*ProductRequest))
+		return srv.(CreateServiceServer).CreateCluster(ctx, req.(*ClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _ProdService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "service.ProdService",
-	HandlerType: (*ProdServiceServer)(nil),
+var _CreateService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "service.CreateService",
+	HandlerType: (*CreateServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetProductStock",
-			Handler:    _ProdService_GetProductStock_Handler,
+			MethodName: "CreateCluster",
+			Handler:    _CreateService_CreateCluster_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -7,6 +7,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+
 	"grpc-pixiu/service"
 )
 
@@ -19,8 +20,8 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := service.NewProdServiceClient(conn)
-	request := &service.ProductRequest{
+	client := service.NewCreateServiceClient(conn)
+	createCluster := &service.ClusterRequest{
 		ClusterName: "huawei",
 		MasterInfo: map[string]string{
 			"HostName": "81.68.210.233",
@@ -30,9 +31,9 @@ func main() {
 		},
 	}
 
-	stockResponse, err := client.GetProductStock(context.Background(), request)
+	clusterStatus, err := client.CreateCluster(context.Background(), createCluster)
 	if err != nil {
-		log.Fatal("查询库存出错", err)
+		log.Fatal("集群安装失败", err)
 	}
-	fmt.Println("查询成功", stockResponse)
+	fmt.Println("集群安装成功", clusterStatus)
 }

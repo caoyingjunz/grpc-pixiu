@@ -6,10 +6,10 @@ option go_package = "../service";
 package service;
 
 // 定义request model 请求
-message ProductRequest {
+message ClusterRequest {
   string ClusterName = 1;
   float KubeRelease = 2;
-  string Region = 3;
+  repeated string Region = 3;
   string ContainerRunTime = 4;
   string ContainerNetworkPlugins = 5;
   string ClusterCidr = 6;
@@ -19,42 +19,16 @@ message ProductRequest {
   string VipKubernetes = 10;
   map<string,string> MasterInfo = 11;
   map<string,string> NodeInfo = 12;
-  string NodeLogin = 13;
+  repeated string NodeLogin = 13;
 }
 
 // 定义response model 返回
-message ProductResponse {
-  string clustername = 1; // 1代表顺序
-  string username = 2;
-  string password = 3;
+message ClusterResponse {
+  string ClusterName = 1; // 1代表顺序
 }
 
 // 定义服务主体
-service ProdService {
+service CreateService {
   // 定义方法
-  rpc GetProductStock(ProductRequest) returns(ProductResponse);
+  rpc CreateCluster(ClusterRequest) returns(ClusterResponse);
 }
-
-
-
-//message ClusterRequest{
-//
-//  message ClusterInfo {
-//
-//
-//  message AddNode {
-//    string ClusterType = 1;
-//    string VipKubernetes =2;
-//    string DeplayMaster = 3;
-//    string DeplayNode = 4;
-//    string NodeLogin = 5;
-//  }
-//
-//  message ClusterDeploy {
-//    string ApiServerAdress = 1;
-//    string KubeProxy =2;
-//  }
-//
-//  message Module {
-//  }
-//}

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 
@@ -13,7 +12,7 @@ import (
 func main() {
 	server := grpc.NewServer()
 
-	service.RegisterProdServiceServer(server, service.ProductService)
+	service.RegisterCreateServiceServer(server, service.CreateClusterService)
 
 	listen, err := net.Listen("tcp", ":8002")
 	if err != nil {
@@ -23,5 +22,4 @@ func main() {
 	if err != nil {
 		log.Fatal("启动服务出错：", err)
 	}
-	fmt.Println("启动grpc服务端成功")
 }
