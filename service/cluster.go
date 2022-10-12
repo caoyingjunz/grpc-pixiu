@@ -70,8 +70,7 @@ func BindXml(request *ClusterRequest) {
 		log.Fatal("xml解析错误")
 	}
 	// 通过ioutil.writeFile写入文件
-	err = ioutil.WriteFile(config.File, out, 0777)
-	if err != nil {
+	if err = ioutil.WriteFile(config.File, out, 0777); err != nil {
 		log.Fatal("xml写入错误")
 	}
 }
