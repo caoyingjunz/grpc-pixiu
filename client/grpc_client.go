@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"google.golang.org/grpc"
@@ -35,5 +34,5 @@ func main() {
 	if err != nil {
 		log.Fatal("集群安装失败", err)
 	}
-	fmt.Println("集群安装成功", clusterStatus)
+	log.Fatal("集群安装成功", clusterStatus)
 }

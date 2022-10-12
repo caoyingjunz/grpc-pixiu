@@ -9,5 +9,3 @@ type ClusterConfiguration struct {
 	ContainerdRelease       string `yaml:"containerd_release"`
 	ContainerdReleaseUbuntu string `yaml:"containerd_release_ubuntu"`
 }
-
-type Galbals map[string]interface{}
