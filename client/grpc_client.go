@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"google.golang.org/grpc"
@@ -30,9 +31,21 @@ func main() {
 		},
 	}
 
-	clusterStatus, err := client.CreateCluster(context.Background(), createCluster)
+	check, err := client.Check(context.Background(), createCluster)
 	if err != nil {
-		log.Fatal("集群安装失败", err)
+		log.Fatal("precondition fail", err)
 	}
-	log.Fatal("集群安装成功", clusterStatus)
+	fmt.Println("precondition successful", check)
+
+	writefile, err := client.WriteFile(context.Background(), createCluster)
+	if err != nil {
+		log.Fatal("write globals file fail:", err)
+	}
+	fmt.Println("write globals file successful:", writefile)
+
+	installation, err := client.Installation(context.Background(), createCluster)
+	if err != nil {
+		log.Fatal("Kubernetes installation fail", err)
+	}
+	fmt.Println("Kubernetes installation successful:", installation)
 }
