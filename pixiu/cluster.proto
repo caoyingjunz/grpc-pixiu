@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package = "../service";
+option go_package = "../cmd";
 
-package service;
+package cmd;
 
 // 定义request model 请求
 message ClusterRequest {

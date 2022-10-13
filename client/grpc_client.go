@@ -3,12 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	main2 "grpc-pixiu/cmd"
 	"log"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-
-	"grpc-pixiu/service"
 )
 
 const address = "localhost:8002"
@@ -20,8 +19,8 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := service.NewCreateServiceClient(conn)
-	createCluster := &service.ClusterRequest{
+	client := main2.NewCreateServiceClient(conn)
+	createCluster := &main2.ClusterRequest{
 		ClusterName: "huawei",
 		MasterInfo: map[string]string{
 			"HostName": "81.68.210.233",

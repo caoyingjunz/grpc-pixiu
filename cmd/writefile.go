@@ -1,14 +1,14 @@
-package service
+package cmd
 
 import (
 	"context"
-	"grpc-pixiu/options"
 	"io/ioutil"
 	"log"
 
 	"gopkg.in/yaml.v2"
 
 	"grpc-pixiu/config"
+	"grpc-pixiu/options"
 )
 
 func (p *createClusterService) WriteFile(ctx context.Context, clusterInfo *ClusterRequest) (*ClusterResponse, error) {

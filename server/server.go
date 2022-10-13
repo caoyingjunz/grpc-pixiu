@@ -1,24 +1,23 @@
 package main
 
 import (
+	"grpc-pixiu/cmd"
 	"log"
 	"net"
 
 	"google.golang.org/grpc"
-
-	"grpc-pixiu/service"
 )
 
 func main() {
-	server := grpc.NewServer()
+	newServer := grpc.NewServer()
 
-	service.RegisterCreateServiceServer(server, service.CreateClusterService)
+	cmd.RegisterCreateServiceServer(newServer, cmd.CreateClusterService)
 
 	listen, err := net.Listen("tcp", ":8002")
 	if err != nil {
 		log.Fatal("启动监听出错：", err)
 	}
-	err = server.Serve(listen)
+	err = newServer.Serve(listen)
 	if err != nil {
 		log.Fatal("启动服务出错：", err)
 	}
