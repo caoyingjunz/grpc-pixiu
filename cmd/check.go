@@ -6,6 +6,7 @@ import (
 	"os/exec"
 
 	"grpc-pixiu/options"
+	pixiupb "grpc-pixiu/pixiu"
 )
 
 var CreateClusterService = &createClusterService{}
@@ -13,7 +14,7 @@ var CreateClusterService = &createClusterService{}
 type createClusterService struct {
 }
 
-func (p *createClusterService) Check(ctx context.Context, clusterInfo *ClusterRequest) (*ClusterResponse, error) {
+func (p *createClusterService) Check(ctx context.Context, clusterInfo *pixiupb.ClusterRequest) (*pixiupb.ClusterResponse, error) {
 	var err error
 	startTime := options.GetStartTime()
 
@@ -32,7 +33,7 @@ func (p *createClusterService) Check(ctx context.Context, clusterInfo *ClusterRe
 		log.Fatal("precondition fail:", err)
 	}
 	endTime := options.GetEndTime()
-	return &ClusterResponse{
+	return &pixiupb.ClusterResponse{
 		ResponseInfo: "precondition successful:",
 		StartTime:    startTime,
 		EndTime:      endTime,

@@ -9,20 +9,17 @@ import (
 
 	"grpc-pixiu/config"
 	"grpc-pixiu/options"
+	pixiupb "grpc-pixiu/pixiu"
 )
 
-func (p *createClusterService) WriteFile(ctx context.Context, clusterInfo *ClusterRequest) (*ClusterResponse, error) {
+func (p *createClusterService) WriteFile(ctx context.Context, clusterInfo *pixiupb.ClusterRequest) (*pixiupb.ClusterResponse, error) {
 	startTime := options.GetStartTime()
 
 	clusterConfiguration := config.GetConfig()
-	globalsFile := config.ClusterConfiguration{
-		Kube_Release:            clusterInfo.MasterInfo["HostName"],
-		ClusterCidr:             clusterInfo.MasterInfo["Username"],
-		ServiceCidr:             clusterInfo.MasterInfo["Password"],
-		DockerRelease:           clusterConfiguration.DockerRelease,
-		DockerReleaseUbuntu:     clusterConfiguration.DockerReleaseUbuntu,
-		ContainerdRelease:       clusterConfiguration.ContainerdRelease,
-		ContainerdReleaseUbuntu: clusterConfiguration.ContainerdReleaseUbuntu,
+	globalsFile := config.BuildCloud{
+		Name:      clusterInfo.Name,
+		AliasName: clusterConfiguration.AliasName,
+		// TODO继续增加渲染的参数
 	}
 	newfile, err := yaml.Marshal(globalsFile)
 	if err != nil {
@@ -33,7 +30,7 @@ func (p *createClusterService) WriteFile(ctx context.Context, clusterInfo *Clust
 		log.Fatal("xml写入错误")
 	}
 	endTime := options.GetEndTime()
-	return &ClusterResponse{
+	return &pixiupb.ClusterResponse{
 		ResponseInfo: "write globals file successful:",
 		StartTime:    startTime,
 		EndTime:      endTime,

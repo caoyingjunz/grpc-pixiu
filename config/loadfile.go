@@ -1,14 +1,15 @@
 package config
 
 import (
+	"fmt"
 	"os"
 
 	"gopkg.in/yaml.v2"
 )
 
-const File = "globals.yml"
+const File = "/etc/kubez/globals.yml"
 
-func loadConfigFromFile(file string) (*ClusterConfiguration, error) {
+func loadConfigFromFile(file string) (*BuildCloud, error) {
 	data, err := os.ReadFile(file)
 	if err != nil {
 		return nil, err
@@ -16,8 +17,8 @@ func loadConfigFromFile(file string) (*ClusterConfiguration, error) {
 	return loadConfig(data)
 }
 
-func loadConfig(data []byte) (*ClusterConfiguration, error) {
-	var pc ClusterConfiguration
+func loadConfig(data []byte) (*BuildCloud, error) {
+	var pc BuildCloud
 	if err := yaml.Unmarshal(data, &pc); err != nil {
 		return nil, err
 	}
@@ -25,10 +26,10 @@ func loadConfig(data []byte) (*ClusterConfiguration, error) {
 	return &pc, nil
 }
 
-func GetConfig() *ClusterConfiguration {
+func GetConfig() *BuildCloud {
 	clusterConfiguration, err := loadConfigFromFile(File)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return clusterConfiguration
 }

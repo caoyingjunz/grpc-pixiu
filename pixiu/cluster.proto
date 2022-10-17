@@ -1,38 +1,50 @@
 syntax = "proto3";
 
-option go_package = "../cmd";
+option go_package = "../pixiu";
 
-package cmd;
+package pixiu;
 
 // 定义request model 请求
 message ClusterRequest {
-  string ClusterName = 1;
-  string KubeRelease = 2;
-  repeated string Region = 3;
-  string ContainerRunTime = 4;
-  string ContainerNetworkPlugins = 5;
-  string ClusterCidr = 6;
-  string ServiceCidr = 7;
-  string ClusterDescribe = 8;
-  string ClusterType = 9;
-  string VipKubernetes = 10;
-  map<string, string> MasterInfo = 11;
-  map<string, string> NodeInfo = 12;
-  repeated string NodeLogin = 13;
+  string Name = 1;
+  string AliasName = 2;
+  int64 CloudType = 3;
+  string Region = 4;
+  Kubernetesspec Kubernetes = 5;
+  bool  CreateNamespace = 6;
+  string Description = 7;
+}
+
+message Kubernetesspec {
+  string ApiServer = 1;
+  string Version = 2;
+  string Runtime = 3;
+  string Cni = 4;
+  string ServiceCidr = 5;
+  string PodCidr = 6;
+  string ProxyMode = 7;
+  repeated NodeSpec Masters = 8;
+  repeated NodeSpec Nodes = 9;
+}
+
+message NodeSpec {
+  string HostName = 1;
+  string Address = 2;
+  string User = 3;
+  string Password = 4;
+
 }
 
 // 定义response model 返回
 message ClusterResponse {
   string ClusterName = 1;
   string ResponseInfo = 2;
-  string StartTime =3;
-  string EndTime =4;
+  string StartTime = 3;
+  string EndTime = 4;
 }
 
 // 定义服务主体
 service CreateService {
-  // 检查kubez
-  rpc Check(ClusterRequest) returns(ClusterResponse);
   // 写入globals.yml
   rpc WriteFile(ClusterRequest) returns(ClusterResponse);
   //安装kubernetes集群

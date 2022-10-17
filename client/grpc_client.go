@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	main2 "grpc-pixiu/cmd"
 	"log"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	pixiupb "grpc-pixiu/pixiu"
 )
 
 const address = "localhost:8002"
@@ -19,22 +19,17 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := main2.NewCreateServiceClient(conn)
-	createCluster := &main2.ClusterRequest{
-		ClusterName: "huawei",
-		MasterInfo: map[string]string{
-			"HostName": "81.68.210.233",
-			"Adress":   "81.68.210.233",
-			"Username": "root",
-			"Password": "qq13069139214.",
-		},
+	client := pixiupb.NewCreateServiceClient(conn)
+	createCluster := &pixiupb.ClusterRequest{
+		Name:      "huawei",
+		AliasName: "test",
 	}
 
-	check, err := client.Check(context.Background(), createCluster)
-	if err != nil {
-		log.Fatal("precondition fail", err)
-	}
-	fmt.Println("precondition successful", check)
+	//check, err := client.Check(context.Background(), createCluster)
+	//if err != nil {
+	//	log.Fatal("precondition fail", err)
+	//}
+	//fmt.Println("precondition successful", check)
 
 	writefile, err := client.WriteFile(context.Background(), createCluster)
 	if err != nil {

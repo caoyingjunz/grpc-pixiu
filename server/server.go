@@ -6,12 +6,14 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
+
+	pixiupb "grpc-pixiu/pixiu"
 )
 
 func main() {
 	newServer := grpc.NewServer()
 
-	cmd.RegisterCreateServiceServer(newServer, cmd.CreateClusterService)
+	pixiupb.RegisterCreateServiceServer(newServer, cmd.CreateClusterService)
 
 	listen, err := net.Listen("tcp", ":8002")
 	if err != nil {
