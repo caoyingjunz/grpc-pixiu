@@ -3,9 +3,9 @@ package cmd
 import (
 	"context"
 	"io/ioutil"
-	"log"
 
 	"gopkg.in/yaml.v2"
+	"k8s.io/klog"
 
 	"grpc-pixiu/config"
 	"grpc-pixiu/options"
@@ -23,11 +23,11 @@ func (p *createClusterService) WriteFile(ctx context.Context, clusterInfo *pixiu
 	}
 	newfile, err := yaml.Marshal(globalsFile)
 	if err != nil {
-		log.Fatal("xml解析错误")
+		klog.Errorf("parsing xml fail:,", err)
 	}
 	// 通过ioutil.writeFile写入文件
 	if err = ioutil.WriteFile(config.File, newfile, 0777); err != nil {
-		log.Fatal("xml写入错误")
+		klog.Errorf("write xml fail:,", err)
 	}
 	endTime := options.GetEndTime()
 	return &pixiupb.ClusterResponse{

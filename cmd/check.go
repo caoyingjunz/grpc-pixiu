@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"context"
-	"log"
 	"os/exec"
+
+	"k8s.io/klog"
 
 	"grpc-pixiu/options"
 	pixiupb "grpc-pixiu/pixiu"
@@ -27,10 +28,10 @@ func (p *createClusterService) Check(ctx context.Context, clusterInfo *pixiupb.C
 		if err == nil {
 			multinodeCheckCmd := exec.Command(options.MultinodeCheckCmd)
 			if err = multinodeCheckCmd.Run(); err != nil {
-				log.Fatal("Multinode 配置:", err)
+				klog.Errorf("Multinode configuration fail:", err)
 			}
 		}
-		log.Fatal("precondition fail:", err)
+		klog.Errorf("precondition fail:", err)
 	}
 	endTime := options.GetEndTime()
 	return &pixiupb.ClusterResponse{

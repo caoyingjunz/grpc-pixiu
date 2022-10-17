@@ -1,13 +1,13 @@
 package config
 
 import (
-	"fmt"
 	"os"
 
 	"gopkg.in/yaml.v2"
+	"k8s.io/klog"
 )
 
-const File = "/etc/kubez/globals.yml"
+const YmlFile = "/etc/kubez/globals.yml"
 
 func loadConfigFromFile(file string) (*BuildCloud, error) {
 	data, err := os.ReadFile(file)
@@ -27,9 +27,9 @@ func loadConfig(data []byte) (*BuildCloud, error) {
 }
 
 func GetConfig() *BuildCloud {
-	clusterConfiguration, err := loadConfigFromFile(File)
+	clusterConfiguration, err := loadConfigFromFile(YmlFile)
 	if err != nil {
-		fmt.Println(err)
+		klog.Error("load config fail:", err)
 	}
 	return clusterConfiguration
 }

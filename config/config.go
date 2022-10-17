@@ -1,5 +1,17 @@
 package config
 
+type Config struct {
+	Default DefaultOptions `yaml:"default"`
+}
+
+type DefaultOptions struct {
+	Listen   int    `yaml:"listen"`
+	LogType  string `yaml:"log_type"`
+	LogDir   string `yaml:"log_dir"`
+	LogLevel string `yaml:"log_level"`
+	JWTKey   string `yaml:"jwt_key"`
+}
+
 type BuildCloud struct {
 	Name            string          `json:"name"`       // 名称，系统自动生成，只能为字符串
 	AliasName       string          `json:"alias_name"` // 可读性的名称，支持中午

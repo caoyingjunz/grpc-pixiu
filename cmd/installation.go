@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"context"
-	"log"
 	"os/exec"
+
+	"k8s.io/klog"
 
 	"grpc-pixiu/options"
 	pixiupb "grpc-pixiu/pixiu"
@@ -16,17 +17,17 @@ func (p *createClusterService) Installation(ctx context.Context, clusterInfo *pi
 
 	multinodeInstallCmd := exec.Command("/bin/bash", "-c", options.MultinodeInstallCmd)
 	if err = multinodeInstallCmd.Run(); err != nil {
-		log.Fatal("Multinode install 配置:", err)
+		klog.Errorf("multinode install:", err)
 	}
 
 	deployCmd := exec.Command("/bin/bash", "-c", options.DeployCmd)
 	if err = deployCmd.Run(); err != nil {
-		log.Fatal("deploy 配置:", err)
+		klog.Errorf("deploy configuration:", err)
 	}
 
 	rcCmd := exec.Command("/bin/bash", "-c", options.RcCmd)
 	if err = rcCmd.Run(); err != nil {
-		log.Fatal("rc 配置:", err)
+		klog.Errorf("rc configuration:", err)
 	}
 	endTime := options.GetEndTime()
 

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"grpc-pixiu/cmd"
-	"log"
 	"net"
 
 	"google.golang.org/grpc"
+	"k8s.io/klog"
 
+	"grpc-pixiu/cmd"
 	pixiupb "grpc-pixiu/pixiu"
 )
 
@@ -17,10 +17,10 @@ func main() {
 
 	listen, err := net.Listen("tcp", ":8002")
 	if err != nil {
-		log.Fatal("启动监听出错：", err)
+		klog.Error("tcp listen fail:", err)
 	}
 	err = newServer.Serve(listen)
 	if err != nil {
-		log.Fatal("启动服务出错：", err)
+		klog.Error("start service fail:", err)
 	}
 }
